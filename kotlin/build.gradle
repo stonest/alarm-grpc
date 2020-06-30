@@ -18,18 +18,17 @@ repositories {
   google()
   jcenter()
   mavenCentral()
-  mavenLocal()
 }
 
 apply plugin: "kotlin"
 apply plugin: "com.google.protobuf"
+apply plugin: "maven-publish"
 
 // Generate IntelliJ IDEA's .idea & .iml project files.
 // protobuf-gradle-plugin automatically registers *.proto and the gen output files
 // to IntelliJ as sources.
 // For best results, install the Protobuf and Kotlin plugins for IntelliJ.
 apply plugin: "idea"
-apply plugin: "application"
 
 dependencies {
   implementation "io.grpc:grpc-kotlin-stub:$grpc_kotlin_version"
@@ -77,4 +76,23 @@ protobuf {
             }
         }
     }
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = uri("https://maven.pkg.github.com/stonest/alarm-protobuf-gen")
+      credentials {
+        username = System.getenv("GH_USERNAME")
+        password = System.getenv("GH_TOKEN")
+      }
+    }
+  }
+  publications {
+    showeralarm(MavenPublication) {
+      groupId = 'com.beerfie.grpc.showeralarm'
+      from(components.java)
+    }
+  }
 }
