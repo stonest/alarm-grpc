@@ -31,7 +31,7 @@ apply plugin: "maven-publish"
 apply plugin: "idea"
 
 group = "com.beerfie.grpc"
-version = System.getenv("GITHUB_REF")
+version = 0.2
 
 dependencies {
   implementation "io.grpc:grpc-kotlin-stub:$grpc_kotlin_version"
