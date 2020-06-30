@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.beerfie.stonest.grpc.showeralarm;
+
+option java_multiple_files = true;
+
+// Service to perform alarm operations
+service AlarmStore {
+    // Deletes an alarm specified by a key
+    rpc DeleteAlarm(Alarm) returns (ActionResponse) {}
+    // Updates a given alarm
+    rpc UpdateAlarm(Alarm) returns (ActionResponse) {}
+    // Lists all alarms stored
+    rpc ListAlarms(ListAlarmsParams) returns (ActionResponse) {}
+    // Creates a new alarm
+    rpc CreateAlarm(Alarm) returns (ActionResponse) {}
+}
+
+message Alarm {
+    string id = 1;
+    string day = 2;
+    string time = 3;
+}
+
+message ActionResponse {
+    repeated Alarm alarms = 1;
+}
+
+message ListAlarmsParams {}
