@@ -2,8 +2,8 @@
 name: Run Gradle on PRs
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - kotlin*
 jobs:
   gradle:
     strategy:
