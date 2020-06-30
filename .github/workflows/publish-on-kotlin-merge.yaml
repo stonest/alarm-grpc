@@ -2,7 +2,7 @@ name: Run Gradle on PRs
 on: push
 jobs:
   gradle:
-    if: contains(github.head_ref, 'kotlin') == 'true'
+    if: contains(github.head_ref, 'kotlin') == 'true' && github.base_ref == 'master'
     strategy:
       matrix:
         os: [ubuntu-latest]
