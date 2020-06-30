@@ -28,5 +28,5 @@ jobs:
         build-root-directory: kotlin
         arguments: publish
       env:
-        GH_USERNAME: ${{ secrets.gh_username }}
-        GH_PASSWORD: ${{ secrets.gh_password }}
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
