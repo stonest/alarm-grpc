@@ -3,7 +3,7 @@ name: Run Gradle on PRs
 on:
   push:
     tags:
-      - v*
+      - "*"
 jobs:
   gradle:
     strategy:
