@@ -30,6 +30,9 @@ apply plugin: "maven-publish"
 // For best results, install the Protobuf and Kotlin plugins for IntelliJ.
 apply plugin: "idea"
 
+group = "com.beerfie.grpc"
+version = System.getenv("GITHUB_REF")
+
 dependencies {
   implementation "io.grpc:grpc-kotlin-stub:$grpc_kotlin_version"
 
@@ -91,7 +94,6 @@ publishing {
   }
   publications {
     showeralarm(MavenPublication) {
-      groupId = 'com.beerfie.grpc.showeralarm'
       from(components.java)
     }
   }
