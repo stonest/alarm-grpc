@@ -4,7 +4,7 @@ on:
     types: [closed]
 jobs:
   gradle:
-    if: contains(github.head_ref, 'kotlin')
+    if: contains(github.head_ref, 'kotlin') && github.base_ref == 'master'
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -14,18 +14,11 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: 11
-    - uses: eskatos/gradle-command-action@v1
-      with:
-        build-root-directory: kotlin
-        arguments: build
-    - uses: eskatos/gradle-command-action@v1
-      with:
-        build-root-directory: kotlin
-        arguments: generatePomFileForShoweralarmPublication
-    - uses: eskatos/gradle-command-action@v1
-      with:
-        build-root-directory: kotlin
-        arguments: publish
+    - name: Build with Gradle
+    - run: ./gradlew build
+    - run: generatePomFileForShoweralarmPublication
+    - run: publish
+      working-directory: kotlin
       env:
         GH_USERNAME: ${{ secrets.GH_USERNAME }}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
