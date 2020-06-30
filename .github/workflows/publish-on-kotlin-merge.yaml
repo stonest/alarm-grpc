@@ -2,7 +2,7 @@ name: Run Gradle on PRs
 on: push
 jobs:
   gradle:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && contains(github.head_ref, 'kotlin') && github.base_ref == 'master'
+    if: github.event.pull_request.merged == true && contains(github.head_ref, 'kotlin') && github.base_ref == 'master'
     strategy:
       matrix:
         os: [ubuntu-latest]
