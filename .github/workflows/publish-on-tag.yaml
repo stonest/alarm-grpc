@@ -1,11 +1,8 @@
-# .github/workflows/gradle-build-pr.yml
 name: Run Gradle on PRs
-on:
-  push:
-    branches:
-      - kotlin*
+on: push
 jobs:
   gradle:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && contains(github.head_ref, 'kotlin') && github.base_ref == 'master'
     strategy:
       matrix:
         os: [ubuntu-latest]
