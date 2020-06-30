@@ -4,7 +4,7 @@ on:
     types: [closed]
 jobs:
   gradle:
-    if: contains(github.head_ref, 'kotlin') == 'true' && github.base_ref == 'master'
+    if: contains(github.head_ref, 'kotlin')
     strategy:
       matrix:
         os: [ubuntu-latest]
