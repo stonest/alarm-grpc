@@ -15,9 +15,10 @@ jobs:
       with:
         java-version: 11
     - name: Build with Gradle
-    - run: ./gradlew build
-    - run: generatePomFileForShoweralarmPublication
-    - run: publish
+      run: |
+            ./gradlew build
+            ./gradlew generatePomFileForShoweralarmPublication
+            ./gradlew publish
       working-directory: kotlin
       env:
         GH_USERNAME: ${{ secrets.GH_USERNAME }}
