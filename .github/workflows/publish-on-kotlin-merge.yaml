@@ -1,5 +1,7 @@
 name: Run Gradle on PRs
-on: push
+on: 
+  pull_request:
+    types: [closed]
 jobs:
   gradle:
     if: contains(github.head_ref, 'kotlin') == 'true' && github.base_ref == 'master'
