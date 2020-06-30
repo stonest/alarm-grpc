@@ -51,6 +51,14 @@ dependencies {
   implementation "com.google.guava:guava:28.2-jre"
 }
 
+sourceSets {
+  main {
+    proto {
+      srcDir '../proto/alarm'
+    }
+  }
+}
+
 protobuf {
     protoc { artifact = "com.google.protobuf:protoc:$protobuf_version" }
     plugins {
