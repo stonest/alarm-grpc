@@ -22,7 +22,7 @@ jobs:
     - name: Generate GRPC Code
       run: |
         mkdir alarm_grpc
-        python -m grpc_tools.protoc -I../proto --python_out=alarm_grpc --grpc_python_out=alarm_grpc ../proto/alarm.proto
+        python -m grpc_tools.protoc -I../proto/ --python_out=alarm --grpc_python_out=alarm ../proto/alarm.proto
       working_directory: python
     - name: Package
       run: |

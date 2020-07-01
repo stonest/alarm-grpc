@@ -8,11 +8,15 @@ setup(
     version="0.0.1",
     author="stonest",
     author_email="theking@beerfie.com",
-    description="A server that stores alarm data",
+    description="GRPC generated server and client code for the shower alarm.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://pypi.fury.io/stonest/alarm_grpc",
     packages=find_packages(),
+    install_requires=[
+      'grpcio',
+
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
