@@ -26,9 +26,8 @@ jobs:
       working_directory: python
     - name: Package
       run: |
-        pip install requirements.txt
         python3 setup.py sdist bdist_wheel
-        python3 twine upload --repository https://pypi.fury.io/stonest/ dist/* -p ""
+        twine upload --repository --repository-url https://push.fury.io/stonest -p ""
       working_directory: python
       env:
         TWINE_USERNAME = ${{ secrets.FURY_TOKEN }}
