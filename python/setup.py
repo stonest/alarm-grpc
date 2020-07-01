@@ -4,18 +4,18 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="alarm_grpc",
-    version="0.0.1",
+    name="alarmgrpc",
+    version="0.0.3",
     author="stonest",
     author_email="theking@beerfie.com",
     description="GRPC generated server and client code for the shower alarm.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://pypi.fury.io/stonest/alarm_grpc",
+    url="https://pypi.fury.io/stonest/alarmgrpc",
     packages=find_packages(),
     install_requires=[
       'grpcio',
-
+      'protobuf'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
