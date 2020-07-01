@@ -1,5 +1,5 @@
 name: Run Gradle on PRs
-on: 
+on:
   pull_request:
     types: [closed]
 jobs:
@@ -11,23 +11,22 @@ jobs:
         python-version: [3.8]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Deps
-      run: pip install -r requirements.txt
-      working_directory: python
-    - name: Generate GRPC Code
-      run: |
-        mkdir alarm_grpc
-        python -m grpc_tools.protoc -I../proto/ --python_out=alarm --grpc_python_out=alarm ../proto/alarm.proto
-      working_directory: python
-    - name: Package
-      run: |
-        python3 setup.py sdist bdist_wheel
-        twine upload --repository-url https://push.fury.io/stonest -p "" dist/*
-      working_directory: python
-      env:
-        TWINE_USERNAME = ${{ secrets.FURY_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Deps
+        run: pip install -r requirements.txt
+        working_directory: python
+      - name: Generate GRPC Code
+        run: |
+          mkdir alarm_grpc
+          python -m grpc_tools.protoc -I../proto/ --python_out=alarm --grpc_python_out=alarm ../proto/alarm.proto
+        working_directory: python
+      - name: Package
+        run: |
+          python3 setup.py sdist bdist_wheel
+          twine upload --repository-url https://push.fury.io/stonest -p "" dist/*
+        working_directory: python
+        env: TWINE_USERNAME = ${{ secrets.FURY_TOKEN }}
