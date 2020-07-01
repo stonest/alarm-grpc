@@ -8,3 +8,4 @@ local.properties
 dist/
 build/
 *.egg-info
+alarm_pb2*
