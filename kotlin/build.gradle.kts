@@ -75,7 +75,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/stonest/alarm-protobuf-gen")
+            url = uri("https://maven.pkg.github.com/stonest/alarm-grpc")
             credentials {
                 username = System.getenv("GH_USERNAME")
                 password = System.getenv("GH_TOKEN")
