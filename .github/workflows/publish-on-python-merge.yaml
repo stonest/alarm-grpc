@@ -18,14 +18,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Deps
         run: pip install -r requirements.txt
-        working_directory: python
+        working-directory: python
       - name: Generate GRPC Code
         run: |
           python3 -m grpc_tools.protoc -I ../proto --python_out=. --grpc_python_out=. ../proto/alarmgrpc/alarm.proto
-        working_directory: python
+        working-directory: python
       - name: Package
         run: |
           python3 setup.py sdist bdist_wheel
           twine upload --repository-url https://packages.beerfie.com/pypi/ -p "" dist/*
-        working_directory: python
+        working-directory: python
         env: TWINE_USERNAME = ${{ secrets.FURY_TOKEN }}
