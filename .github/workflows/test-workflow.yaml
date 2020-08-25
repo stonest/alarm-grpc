@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         # Checkout here so it's availabe for node to use
-        - name: Checkout
+        - name: checkout
         uses: actions/checkout@v2
         - name: Setup Node
         uses: actions/setup-node@v1
