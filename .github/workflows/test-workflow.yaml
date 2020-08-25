@@ -7,7 +7,7 @@ jobs:
       VAULT_SECRETS_FILE: secrets-dev.yml
     runs-on: ubuntu-latest
     steps:
-    # Conditional variables for secrets
+    # Conditional variables for secrets 
     - if: github.ref == 'refs/heads/master'
       run: echo "::set-env name=VAULT_SECRETS_FILE::secrets-prod.yml"
     - if: github.ref == 'refs/heads/develop'
