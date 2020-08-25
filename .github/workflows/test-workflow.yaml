@@ -3,36 +3,41 @@ on: [pull_request]
 jobs:
   setup:
     env:
-      VAULT_ADDR: https://xxxxxxxxxxxxxxx
+      VAULT_ADDR: https://xxxxxx
       VAULT_SECRETS_FILE: secrets-dev.yml
     runs-on: ubuntu-latest
     steps:
-      # Checkout here so it's availabe for node to use
-      - name: checkout
+    # Conditional variables for secrets
+    - if: github.ref == 'refs/heads/master'
+      run: echo "::set-env name=VAULT_SECRETS_FILE::secrets-prod.yml"
+    - if: github.ref == 'refs/heads/develop'
+      run: echo "::set-env name=VAULT_SECRETS_FILE::secrets-staging.yml"
+    # Checkout here so it's availabe for node to use
+    - name: Checkout
       uses: actions/checkout@v2
-      - name: Setup Node
+    - name: Setup Node
       uses: actions/setup-node@v1
       with:
-          node-version: 13.x
-          registry-url: https://npm.pkg.github.com/
-          scope: '@xxxxxxxxxxxxxxx'
-      - name: Run secrets
-      run: npx -p @xxxxxxxxxxxxxxx/xxxxxxxxxxxxxxx@0.0.0 vault-secrets ${{ env.VAULT_SECRETS_FILE }}
+        node-version: 13.x
+        registry-url: https://npm.pkg.github.com/
+        scope: '@xxxxxx'
+    - name: Run secrets
+      run: npx -p @xxxxxx/actions-vault-secrets@2.0.2 vault-secrets ${{ env.VAULT_SECRETS_FILE }}
       working-directory: ci
       env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-          VAULT_ADDR: https://xxxxxxxxxxxxxxx
-          AUTH_METHOD: approle
-          AUTH_MOUNT_POINT: pipeline
-          APPROLE_ROLE_ID: ${{ secrets.ROLE_ID  }}
-          APPROLE_SECRET_ID: ${{ secrets.SECRET_ID }}
-      - name: Setup Terraform
+        NODE_AUTH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+        VAULT_ADDR: https://xxxxxx
+        AUTH_METHOD: approle
+        AUTH_MOUNT_POINT: pipeline
+        APPROLE_ROLE_ID: ${{ secrets.ROLE_ID  }}
+        APPROLE_SECRET_ID: ${{ secrets.SECRET_ID }}
+    - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-          terraform_version: 0.12.26
-      - name: Terraform Init
+        terraform_version: 0.12.26
+    - name: Terraform Init
       run: terraform init
-      - name: Terraform Format
+    - name: Terraform Format
       run: terraform fmt -check
-      - name: Terraform Plan
+    - name: Terraform Plan
       run: terraform plan
