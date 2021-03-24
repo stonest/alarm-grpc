@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="alarmgrpc",
-    version="0.0.3",
+    version="0.1.0",
     author="stonest",
     author_email="theking@beerfie.com",
     description="GRPC generated server and client code for the shower alarm.",
