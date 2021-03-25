@@ -13,7 +13,7 @@ service AlarmStore {
     // Lists all alarms stored
     rpc ListAlarms(ListAlarmsParams) returns (ActionResponse) {}
     // Creates a new alarm
-    rpc CreateAlarm(Alarm) returns (ActionResponse) {}
+    rpc CreateAlarm(AlarmRequest) returns (ActionResponse) {}
 }
 
 message AlarmRequest {
