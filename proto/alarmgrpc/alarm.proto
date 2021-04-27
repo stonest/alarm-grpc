@@ -14,6 +14,8 @@ service AlarmStore {
     rpc ListAlarms(ListAlarmsParams) returns (ActionResponse) {}
     // Creates a new alarm
     rpc CreateAlarm(Alarm) returns (ActionResponse) {}
+    // Gets an alarm
+    rpc GetAlarm(AlarmId) returns (Alarm) {}
 }
 
 message AlarmRequest {
@@ -25,6 +27,10 @@ message Alarm {
     string id = 1;
     string day = 2;
     string time = 3;
+}
+
+message AlarmId {
+    string id =1;
 }
 
 message ActionResponse {
