@@ -37,7 +37,7 @@ dependencies {
 }
 
 group = "com.beerfie.grpc"
-version = "0.0.2"
+version = "0.2.0"
 
 sourceSets {
     main {
